@@ -12,6 +12,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,8 +40,16 @@ public class LonelyTwitterActivity extends Activity {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
+				ImportantTweet importantTweet = new ImportantTweet();
+				try {
+					importantTweet.setMessage(text);
+				} catch (TooLongTweetException e) {
+					e.printStackTrace();
+				}
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
+
+
+
 
 			}
 		});
